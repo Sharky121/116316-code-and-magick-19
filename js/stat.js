@@ -9,7 +9,7 @@ var Cloud = {
   GAP: 20
 };
 
-var Text = {
+var TextProperty = {
   FONT: '16px PT Mono',
   FONT_GAP: 5,
   TEXT_HEIGHT: 15,
@@ -68,11 +68,11 @@ var renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, Cloud.x, Cloud.y, Cloud.COLOR);
 
   // Отрисовка сообщения
-  renderText(ctx, 'Ура вы победили!', Text.COLOR, Text.FONT, Text.BASELINE, START_X1, START_Y1);
-  renderText(ctx, 'Список результатов:', Text.COLOR, Text.FONT, Text.BASELINE, START_X1, START_Y1 + Text.TEXT_HEIGHT + Text.FONT_GAP);
+  renderText(ctx, 'Ура вы победили!', TextProperty.COLOR, TextProperty.FONT, TextProperty.BASELINE, START_X1, START_Y1);
+  renderText(ctx, 'Список результатов:', TextProperty.COLOR, TextProperty.FONT, TextProperty.BASELINE, START_X1, START_Y1 + TextProperty.TEXT_HEIGHT + TextProperty.FONT_GAP);
 
   // Высота блока с объявлением победителя
-  var messageHeight = START_Y1 + Text.TEXT_HEIGHT * 3;
+  var messageHeight = START_Y1 + TextProperty.TEXT_HEIGHT * 3;
 
   // Определяем максимальный элемент
   var maxTime = getMaxElement(times);
@@ -85,15 +85,15 @@ var renderStatistics = function (ctx, names, times) {
     var barColor = (names[i] === 'Вы') ? Bar.BAR_COLOR : getColor();
 
     // Отрисовка кол-ва очков
-    renderText(ctx, Math.round(times[i]), Text.COLOR, Text.FONT, Text.BASELINE, stepX, barY);
+    renderText(ctx, Math.round(times[i]), TextProperty.COLOR, TextProperty.FONT, TextProperty.BASELINE, stepX, barY);
 
     // Задаём цвет столбцов
     ctx.fillStyle = barColor;
 
     // Отрисовка столбцов
-    ctx.fillRect(stepX, barY + Text.TEXT_HEIGHT + Text.FONT_GAP, Bar.BAR_WIDTH, barHeight);
+    ctx.fillRect(stepX, barY + TextProperty.TEXT_HEIGHT + TextProperty.FONT_GAP, Bar.BAR_WIDTH, barHeight);
 
     // Отрисовка имён
-    renderText(ctx, names[i], Text.COLOR, Text.FONT, Text.BASELINE, stepX, START_Y2);
+    renderText(ctx, names[i], TextProperty.COLOR, TextProperty.FONT, TextProperty.BASELINE, stepX, START_Y2);
   });
 };
