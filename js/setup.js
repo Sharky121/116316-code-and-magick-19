@@ -59,7 +59,7 @@ var getArrayRandElement = function (arr) {
 };
 
 // Возвращает объект - маг
-var createWizard = function (names, surnames, coatColor, eyesColor) {
+var mockWizard = function (names, surnames, coatColor, eyesColor) {
   var wizardName = getArrayRandElement(names);
   var wizardSurname = getArrayRandElement(surnames);
   var wizardCoatColor = getArrayRandElement(coatColor);
@@ -75,11 +75,11 @@ var createWizard = function (names, surnames, coatColor, eyesColor) {
 };
 
 // Возрващает массив магов
-var createWizardsArray = function (quantity) {
+var mockData = function (quantity) {
   var wizzardsArray = [];
 
   for (var i = 0; i < quantity; i++) {
-    var wizard = createWizard(WIZARD_NAMES, WIZARD_SURNAMES, WIZARD_COAT_COLOR, WIZARD_EYE_COLOR);
+    var wizard = mockWizard(WIZARD_NAMES, WIZARD_SURNAMES, WIZARD_COAT_COLOR, WIZARD_EYE_COLOR);
     wizzardsArray.push(wizard);
   }
 
@@ -110,7 +110,7 @@ var renderWizards = function (wizardsArray) {
 };
 
 // Функция изменения цвета
-var changeColor = function (element) {
+var setColor = function (element) {
   var coatColor = getArrayRandElement(COAT_COLORS);
   var eyesColor = getArrayRandElement(EYES_COLORS);
   var fireballColor = getArrayRandElement(FIREBALL_COLORS);
@@ -131,8 +131,8 @@ var changeColor = function (element) {
   }
 };
 
-var colorChangeHandler = function (evt) {
-  changeColor(evt.target);
+var colorSetHandler = function (evt) {
+  setColor(evt.target);
 };
 
 var onPopupEscPress = function (evt) {
@@ -146,7 +146,7 @@ var openPopup = function () {
   Nodes.userDialog.classList.remove('hidden');
 
   document.addEventListener('keydown', onPopupEscPress);
-  Nodes.form.addEventListener('click', colorChangeHandler);
+  Nodes.form.addEventListener('click', colorSetHandler);
 };
 
 // Функция закрытия окна попап
@@ -154,7 +154,7 @@ var closePopup = function () {
   Nodes.userDialog.classList.add('hidden');
 
   document.removeEventListener('keydown', onPopupEscPress);
-  Nodes.form.removeEventListener('click', colorChangeHandler);
+  Nodes.form.removeEventListener('click', colorSetHandler);
 };
 
 Nodes.setupOpen.addEventListener('click', function () {
@@ -178,7 +178,7 @@ Nodes.setupClose.addEventListener('keydown', function (evt) {
 });
 
 // Создаём магов
-var wizards = createWizardsArray(WIZARD_QUANTITY);
+var wizards = mockData(WIZARD_QUANTITY);
 var wizardsElement = renderWizards(wizards);
 
 Nodes.similarList.appendChild(wizardsElement);
