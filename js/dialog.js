@@ -2,9 +2,50 @@
 (function () {
   var Nodes = {
     setup: document.querySelector('.setup'),
-    dialogHandle: document.querySelector('.upload')
+    dialogHandle: document.querySelector('.upload'),
+    userDialog: document.querySelector('.setup'),
+    form: document.querySelector('.setup-wizard-form'),
+    setupOpen: document.querySelector('.setup-open'),
+    setupClose: document.querySelector('.setup-close')
   };
 
+  var onPopupEscPress = function (evt) {
+    window.util.isEscEvent(evt, closePopup);
+  };
+
+  // Функция открытия окна попап
+  var openPopup = function () {
+    Nodes.userDialog.classList.remove('hidden');
+    Nodes.userDialog.removeAttribute('style');
+    document.addEventListener('keydown', onPopupEscPress);
+    Nodes.form.addEventListener('click', window.colorize);
+  };
+
+  // Функция закрытия окна попап
+  var closePopup = function () {
+    Nodes.userDialog.classList.add('hidden');
+
+    document.removeEventListener('keydown', onPopupEscPress);
+    Nodes.form.removeEventListener('click', window.colorize);
+  };
+
+  Nodes.setupOpen.addEventListener('click', function () {
+    openPopup();
+  });
+
+  Nodes.setupOpen.addEventListener('keydown', function (evt) {
+    window.util.isEnterEvent(evt, openPopup);
+  });
+
+  Nodes.setupClose.addEventListener('click', function () {
+    closePopup();
+  });
+
+  Nodes.setupClose.addEventListener('keydown', function (evt) {
+    window.util.isEnterEvent(evt, closePopup);
+  });
+
+  // Перетаскивание окна
   Nodes.dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
@@ -53,6 +94,5 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-
 })();
 
