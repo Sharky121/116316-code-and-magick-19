@@ -9,44 +9,46 @@
     setupClose: document.querySelector('.setup-close')
   };
 
-  var onPopupEscPress = function (evt) {
-    window.util.isEscEvent(evt, closePopup);
-  };
-
   // Функция открытия окна попап
-  var openPopup = function () {
+  var onPopupOpen = function () {
     Nodes.userDialog.classList.remove('hidden');
     Nodes.userDialog.removeAttribute('style');
+
     document.addEventListener('keydown', onPopupEscPress);
-    Nodes.form.addEventListener('click', window.colorize);
+    Nodes.form.addEventListener('click', onWizardColorize);
+    Nodes.dialogHandle.addEventListener('mousedown', onSetupDialogMove);
+    Nodes.setupClose.addEventListener('click', onPopupClose);
+    Nodes.setupClose.addEventListener('keydown', onSetupCloseEnterPress);
   };
 
   // Функция закрытия окна попап
-  var closePopup = function () {
+  var onPopupClose = function () {
     Nodes.userDialog.classList.add('hidden');
 
     document.removeEventListener('keydown', onPopupEscPress);
-    Nodes.form.removeEventListener('click', window.colorize);
+    Nodes.setupOpen.removeEventListener('click', onPopupClose);
+    Nodes.setupOpen.removeEventListener('click', onSetupCloseEnterPress);
+    Nodes.form.removeEventListener('click', onWizardColorize);
+    Nodes.dialogHandle.removeEventListener('mousedown', onSetupDialogMove);
   };
 
-  Nodes.setupOpen.addEventListener('click', function () {
-    openPopup();
-  });
+  // Функция закрытия окна попап по клавише Esc
+  var onPopupEscPress = function (evt) {
+    window.util.isEscEvent(evt, onPopupClose);
+  };
 
-  Nodes.setupOpen.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, openPopup);
-  });
+  // Функция закрытия окна попап по клавише Enter
+  var onSetupCloseEnterPress = function (evt) {
+    window.util.isEnterEvent(evt, onPopupOpen);
+  };
 
-  Nodes.setupClose.addEventListener('click', function () {
-    closePopup();
-  });
+  // Функция открытия окна попап по клавише Enter
+  var onSetupOpenEnterPress = function (evt) {
+    window.util.isEnterEvent(evt, onPopupOpen);
+  };
 
-  Nodes.setupClose.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, closePopup);
-  });
-
-  // Перетаскивание окна
-  Nodes.dialogHandle.addEventListener('mousedown', function (evt) {
+  // Функция перетаскивания окна
+  var onSetupDialogMove = function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -56,6 +58,7 @@
 
     var dragged = false;
 
+    // Функция перемещения мышки
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
@@ -75,6 +78,7 @@
       Nodes.setup.style.left = (Nodes.setup.offsetLeft - shift.x) + 'px';
     };
 
+    // Функция отпускания кнопки мыши
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
@@ -93,6 +97,16 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
+  };
+
+  // Функция раскрашивания мага
+  var onWizardColorize = function (evt) {
+    window.colorize(evt);
+  };
+
+  // Добавляем слушатели событий
+  Nodes.setupOpen.addEventListener('click', onPopupOpen);
+
+  Nodes.setupOpen.addEventListener('keydown', onSetupOpenEnterPress);
 })();
 

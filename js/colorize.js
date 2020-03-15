@@ -36,9 +36,9 @@
 
   // Функция изменения цвета
   var changeColor = function (element) {
-    var coatColor = window.helper.getArrayRandElement(COAT_COLORS);
-    var eyesColor = window.helper.getArrayRandElement(EYES_COLORS);
-    var fireballColor = window.helper.getArrayRandElement(FIREBALL_COLORS);
+    var coatColor = window.util.getArrayRandElement(COAT_COLORS);
+    var eyesColor = window.util.getArrayRandElement(EYES_COLORS);
+    var fireballColor = window.util.getArrayRandElement(FIREBALL_COLORS);
 
     if (element.matches('.wizard-coat')) {
       element.style.fill = coatColor;
@@ -56,9 +56,9 @@
     }
   };
 
-  var colorChangeHandler = function (evt) {
+  var onWizardChangeColor = function (evt) {
     changeColor(evt.target);
   };
 
-  window.colorize = colorChangeHandler;
+  window.colorize = onWizardChangeColor;
 })();
