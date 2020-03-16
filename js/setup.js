@@ -40,12 +40,12 @@ var onFormSave = function () {
 };
 
 var onFormSubmit = function (evt) {
-  window.backend.save('https://js.dump.academy/code-and-magick', new FormData(Nodes.form), onFormSave, onFormError);
+  window.backend.save(onFormSave,  onFormError);
 
   evt.preventDefault();
 };
 
-window.backend.load('https://js.dump.academy/code-and-magick/data', onWizardsLoad, onWizardsError);
+window.backend.load(onWizardsLoad, onWizardsError);
 Nodes.form.addEventListener('submit', onFormSubmit);
 document.querySelector('.setup-similar').classList.remove('hidden');
 

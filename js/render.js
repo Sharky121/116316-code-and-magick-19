@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+  var SIMILAR_WIZARD_TEMPLATE = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
   // Создаёт из шаблона DOM элемент - маг
   var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
+    var wizardElement = SIMILAR_WIZARD_TEMPLATE.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;

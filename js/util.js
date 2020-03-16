@@ -16,6 +16,11 @@
     }
   };
 
+  // Функция случайного числа с параметром диапазона
+  var getRandomInteger = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
   // Возвращает случайный элемент из массива
   var getArrayRandElement = function (arr) {
     var index = Math.floor(Math.random() * arr.length);
@@ -25,17 +30,7 @@
 
   // Возвращает массив заданной длины со случайными неповторяющимися элементами
   var getRandomElements = function (array, amount) {
-    var newArray = [];
-
-    while (newArray.length < amount) {
-      var randomEl = window.util.getArrayRandElement(array);
-
-      if (newArray.indexOf(randomEl) === -1) {
-        newArray.push(randomEl);
-      }
-    }
-
-    return newArray;
+    return array.filter(getRandomInteger).slice(0, amount);
   };
 
   window.util = {
