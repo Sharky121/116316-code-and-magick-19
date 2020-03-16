@@ -8,10 +8,10 @@
 
   // Возвращает объект - маг
   var createWizard = function (names, surnames, coatColor, eyesColor) {
-    var wizardName = window.helper.getArrayRandElement(names);
-    var wizardSurname = window.helper.getArrayRandElement(surnames);
-    var wizardCoatColor = window.helper.getArrayRandElement(coatColor);
-    var wizardEyesColor = window.helper.getArrayRandElement(eyesColor);
+    var wizardName = window.util.getArrayRandElement(names);
+    var wizardSurname = window.util.getArrayRandElement(surnames);
+    var wizardCoatColor = window.util.getArrayRandElement(coatColor);
+    var wizardEyesColor = window.util.getArrayRandElement(eyesColor);
 
     var Wizard = {
       name: wizardName + ' ' + wizardSurname,
